@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,4 +67,26 @@ Route::get('/user/{name?}', function ($name='John') {
     return 'Nama saya '.$name;
     });
 //e. The web page will appear 'Nama saya John' because the parameters have value 'John'
-    
+
+//Creating a Controller
+Route::get('/hello', [WelcomeController::class,'hello']);
+//e. When open URL localhost/PWL_2024/public/hello the web page will appear will simply display 'Hello World' because the route /hello is mapped to the hello() method of the WelcomeController class, and this method returns the string 'Hello World'.
+
+//f.
+Route::get('/', [PageController::class, 'index']); 
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/articels/{id}', [PageController::class, 'articles']);  
+
+//g
+Route::get('/', [HomeController::class, 'single']);
+Route::get('/about', [AboutController::class, 'single']);
+Route::get('/articles/{id}', [AboutController::class, 'single']);
+
+//Resource Controller
+Route::resource('photos', PhotoController::class);
+Route::resource('photos', PhotoController::class)->only([
+    'index', 'show'
+]);
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+]);
