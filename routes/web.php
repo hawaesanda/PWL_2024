@@ -90,3 +90,22 @@ Route::resource('photos', PhotoController::class)->only([
 Route::resource('photos', PhotoController::class)->except([
     'create', 'store', 'update', 'destroy'
 ]);
+
+//Creating a View
+Route::get('/greeting', function(){
+    return view('hello', ['name' => 'Hawa']);
+});
+//c. When open the URL localhost/PWL_2024/public/greeting, the server will execute code that returns a view with the message "Hello, Hawa".
+
+//View in Directory
+Route::get('/greeting', function () {
+    return view('blog.hello', ['name' => 'Andi']);
+});
+//d. The code defines a route '/greeting' which, when accessed, will return a view called 'blog.hello' and pass an array containing the key 'name' with the value 'Andi' to that view. When opening the URL localhost/PWL_2024/public/greeting, the server will return a page with the message "Hello, Andi".
+
+//Displaying a View from a Controller
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
+//c. When open the URL localhost/PWL_2024/public/greeting, the server will execute the greeting method in the WelcomeController class. This method returns a view called 'blog.hello' and passes an array containing a key 'name' with the value 'Awaa' to that view.
+
+//Forward data to view
+//c. When accessing the URL localhost/PWL_2024/public/greeting, the server will run the greeting method. This method returns a view named 'blog.hello' and passes two variables 'name' with the value 'Andi' and 'occupation' with the value 'Astronaut'. So the web page will show two headers, namely "Hello, Andi" and "You are an Astronaut".
